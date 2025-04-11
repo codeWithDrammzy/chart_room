@@ -9,9 +9,7 @@ tzdata==2025.2
 
 # chart_room
 student study room 
-the chart room is a webapplication develop with python (django) allowing student to host a topic and have a discusion about it 
-
-
+the chart room is a webapplication develop with python (django) allowing student to host a topic and have a discusion about
 ![Image](https://github.com/user-attachments/assets/0ba4b668-c642-4d70-8784-9835acb8f46c)
 
 
