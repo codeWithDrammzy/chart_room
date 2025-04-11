@@ -1,0 +1,28 @@
+<aside class="hidden md:block col-span-1 bg-white shadow-lg p-4 rounded-lg">
+    <h3 class="text-xl font-bold mb-4">Browse Topics </h3>
+    <hr>
+    <ul class="space-y-4">
+      
+        <li class="p-2 bg-gray-100 rounded-lg">
+            <div  class=" flex justify-between">
+                <a href="{% url 'home' %}" class="text-blue-500 font-semibold block w-full">
+                    All 
+                </a>
+                <p><span class="text-gray-500">({{ room_count }})</span></p>
+            </div>
+            
+        </li>
+        {% for topic in topics %}
+            <li class="p-2 bg-gray-100 rounded-lg">
+                <div  class=" flex justify-between">
+                <a href="{% url 'home' %}?q={{ topic.name }}" class="text-blue-500 font-semibold block w-full">
+                    {{ topic.name }} 
+                </a>
+                <p><span class="text-gray-500">({{ topic.room_count }})</span></p>
+            </div>
+            </li>
+        {% empty %}
+            <li class="text-gray-500">No topics available</li>
+        {% endfor %}
+    </ul>
+</aside>

@@ -1,0 +1,46 @@
+{% extends 'chartroom/main.html' %}
+
+{% block content %}
+
+<div class="container mx-auto px-6 py-6 flex justify-center">
+    <div class="p-6 max-w-lg w-full bg-white shadow-lg rounded-lg">
+
+        <h2 class="text-2xl font-semibold text-center mb-4">Create a New Room</h2>
+
+        <form action="" method="POST" class="space-y-4 bg-gray-100 p-4 rounded-lg">
+            {% csrf_token %}
+        
+            {% for field in form %}
+                <div>
+                    <label class="block text-gray-700 font-medium mb-1">{{ field.label }}</label>
+                    {% if field.name == 'topic' %}
+                        <input type="text" name="{{ field.name }}" list="topics" class="w-full p-2 border rounded-md">
+                        <datalist id="topics">
+                            <select id="room_topic">
+                                {% for topic in topics %}
+                                <option value="{{ topic.name }}">
+                            {% endfor %}
+
+                            </select>
+                           
+                        </datalist>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        
+            <div class="flex justify-between items-center">
+                <a href="{% url 'home' %}" class="text-blue-500 hover:underline flex items-center">
+                    <i class="fa fa-arrow-left mr-1"></i> Back to Home
+                </a>
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
+                    Create Room &nbsp;<i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

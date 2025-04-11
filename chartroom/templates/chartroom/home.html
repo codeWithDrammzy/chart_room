@@ -1,0 +1,41 @@
+{% extends 'chartroom/main.html' %}
+
+{% block content %}
+
+
+
+<div class="container mx-auto px-6 py-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        
+        <!-- Left Sidebar -->
+        {%   include 'chartroom/aside-left.html'  %}
+
+                <!-- Main Content -->
+                <!-- Main Content -->
+        <main class="col-span-1 md:col-span-2">
+            <!-- Header Section -->
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-700">Study Room</h2>
+                    <p class="text-gray-600">{{ room_count }} Rooms available</p>
+                </div>
+                <a href="{% url 'create-room' %}" 
+                class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600">
+                    Create Room
+                </a>
+            </div>
+
+            {% if rooms %}
+                {% include 'chartroom/feed-component.html' %}
+            {% else %}
+                <p class="text-gray-600 mt-4">No rooms available. Create one to get started!</p>
+            {% endif %}
+        </main>
+
+        <!-- Right Sidebar -->
+        {% include 'chartroom/activity-component.html' %}
+
+    </div>
+</div>
+
+{% endblock %}

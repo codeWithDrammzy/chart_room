@@ -1,0 +1,18 @@
+<aside class="hidden md:block col-span-1 bg-white shadow-lg p-4 rounded-lg">
+    <h3 class=" bg-blue-400 p-2 rounded text-xl font-bold mb-4">Participants ({{ room.participants.count }} Joined)</h3>
+    <hr class="mb-4 border-gray-200">
+    <div class="space-y-2">
+        {% for user in participants %}
+            <a href="{% url 'profile' user.id %}" class="flex items-center">
+                <div class="avatar avatar--small w-8 h-8 rounded-full overflow-hidden mr-2">
+                    {% if request.user.avater %}
+                        <img src="{{request.user.avater.url }}" alt="Participant's Profile Picture" class="w-full h-full object-cover">
+                    {% else %}
+                        <img src="https://via.placeholder.com/150" alt="Default Profile Picture" class="w-full h-full object-cover">
+                    {% endif %}
+                </div>
+                <p class="text-sm text-gray-800">@{{ user.username }}</p>
+            </a>
+        {% endfor %}
+    </div>
+</aside>

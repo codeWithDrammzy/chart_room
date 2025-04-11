@@ -1,0 +1,51 @@
+{% extends 'chartroom/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mx-auto px-6 py-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+        {% include 'chartroom/aside-left.html' %}
+
+        <main class="col-span-1 md:col-span-2 flex flex-col items-center">
+
+            <div class="profile text-center">
+                <div class="profile__avatar">
+                    <div class="w-48 h-48 rounded-full overflow-hidden"> {% if user.avater %}
+                            <img src="{{ user.avater.url }}" alt="Profile Picture" class="w-full h-full object-cover">
+                        {% else %}
+                            <img src="{% static 'images/avater.png' %}" alt="Default Profile Picture" class="w-full h-full object-cover">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="profile__info mt-4">
+                    <h3 class="text-xl font-semibold">{{ user.username }}</h3>
+                    <p class="text-gray-600">@{{ user.username }}</p>
+                </div>
+                <div class="mt-4">
+                    {% if request.user == user %}
+                        <a href="{% url 'update-user' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Edit Profile</a>
+                    {% endif %}
+                </div>
+                <div class="profile__about mt-4">
+                    <h3 class="text-left font-semibold">About</h3>
+                    <p class="text-gray-600">{{ user.bio|default:"No bio provided." }}</p>
+                </div>
+            </div>
+
+            <div class="w-full mt-8">
+                {% if rooms %}
+                    {% include 'chartroom/feed-component.html' %}
+                {% else %}
+                    <p class="text-gray-600 mt-4 text-center">No rooms available. Create one to get started!</p>
+                {% endif %}
+            </div>
+
+        </main>
+        {% comment %} here is the include to         {% endcomment %}
+        {% include 'chartroom/activity-component.html' %}
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+<aside class="hidden md:block col-span-1 bg-white shadow-lg p-4 rounded-lg">
+    <h3 class="text-xl font-bold mb-4">Recent Activities</h3>
+    <hr>
+    <div class="space-y-4 py-4">
+        {% for message in room_messages %}
+            <div class="activities__box p-4 bg-gray-200 rounded-lg shadow-md">
+                <div class="activities__boxHeader flex justify-between items-center">
+                    
+                    <a href="{% url 'profile' message.user.id %}" class="flex items-center space-x-3">
+                        <div class="avatar w-8 h-8 rounded-full overflow-hidden border-2 border-blue-400">
+                            <img src="{{ message.user.avater.url|default:'/static/images/default-avatar.png' }}" 
+                                 alt="{{ message.user.username }}" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-gray-800 font-semibold">
+                            @{{ message.user.name }}
+                            <span class="text-gray-600 text-sm block">{{ message.created|timesince }} ago</span>
+                        </p>
+                    </a>
+
+                    
+                </div>
+
+                <p class="text-gray-800">
+                    Replied to post: 
+                </p>
+                <a href="{% url 'room' message.room.id %}" class="text-blue-500 font-medium">
+                    {{ message.room }}
+                </a>
+
+                
+                <div class="activities__boxContent mt-2 p-3 bg-gray-300 rounded-lg">
+                    
+                    
+                    
+                    <p class="text-gray-700 text-sm mt-1">
+                        {{ message.body|truncatechars:80 }}
+                    </p>
+                </div>
+                <br> 
+
+                {% if request.user == message.user %}
+                        <a href="{% url 'delete-message' message.id %}" 
+                           class="px-3 py-1 bg-red-500 text-white text-sm font-semibold rounded-lg shadow hover:bg-red-600">
+                            Delete
+                        </a>
+                    {% endif %}
+            </div>
+
+            
+        {% empty %}
+            <p class="text-gray-500 text-center">No recent activities.</p>
+        {% endfor %}
+    </div>
+</aside>

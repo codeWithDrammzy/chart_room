@@ -1,0 +1,22 @@
+    
+<div class="overflow-x-auto mt-4">
+    {% for room in rooms %}
+   
+    <div class="mb-4 p-4 border rounded-lg shadow bg-white">
+        <div class="flex justify-between items-center">
+            <img src="{{room.host.avater.url}}" class="w-12 h-12 object-cover rounded-full">
+            <a class="text-blue-400" href="{% url 'profile' room.host.id %}" class="text-gray-700 font-semibold">@{{ room.host.username }}</a>
+        </div>
+
+        <h5 class="mt-2 text-lg font-bold">
+           
+            <a href="/room/{{ room.id }}" class="text-blue-500 hover:underline">{{ room.name }}</a>
+        </h5>
+        <div class="flex justify-between ">
+            <small class="text-gray-500">{{ room.topic.name }}</small>
+            <small class="text-gray-500">{{ room.participants.count }} joined</small>
+        </div>
+       
+    </div>
+    {% endfor %}
+</div>

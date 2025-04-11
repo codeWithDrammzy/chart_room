@@ -1,0 +1,43 @@
+{% extends 'chartroom/main.html' %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+        {% include 'chartroom/aside-left.html' %}
+
+        <main class="col-span-1 md:col-span-2">
+            <div class="p-6 max-w-lg mx-auto bg-white shadow-lg rounded-lg">
+                <h2 class="text-2xl font-semibold text-center mb-4">Update Room</h2>
+
+                <form action="" method="POST"   class="space-y-4 bg-gray-100 p-4 rounded-lg">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-1">{{ field.label }}</label>
+                            {% if field.name == 'topic' %}
+                                <input type="text" name="{{ field.name }}" list="topics" class="w-full p-2 border rounded-md" value="{{ room.topic.name }}">
+                                <datalist id="topics">
+                                    {% for topic in topics %}
+                                        <option value="{{ topic.name }}">
+                                    {% endfor %}
+                                </datalist>
+                            {% else %}
+                                {{ field }}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
+                        Update Room &nbsp;<i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+        </main>
+
+        {% include 'chartroom/aside-right.html' %}
+
+    </div>
+</div>
+{% endblock %}

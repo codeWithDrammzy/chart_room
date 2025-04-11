@@ -1,0 +1,28 @@
+{% extends 'chartroom/main.html' %}
+
+{% block content %}
+<div class="container mx-auto p-6 max-w-lg bg-white shadow-lg rounded-lg">
+    <h2 class="text-2xl font-semibold text-center mb-4">Delete Room</h2>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <p class="text-gray-700 text-center mb-4">
+            Are you sure you want to delete <span class="font-semibold">"{{ obj }}"</span>?
+        </p>
+
+        <div class="flex justify-center space-x-4">
+            <!-- Go Back Link -->
+            <a href="{{ request.META.HTTP_REFERER|default:'/' }}" 
+               class="px-4 py-2 bg-gray-300 text-gray-700 text-sm font-semibold rounded-lg shadow hover:bg-gray-400">
+                ⬅ Go Back
+            </a>
+
+            <!-- Confirm Button -->
+            <input type="submit" value="✅ Confirm" 
+                   class="px-4 py-2 bg-red-500 text-white text-sm font-semibold rounded-lg shadow hover:bg-red-600 cursor-pointer">
+        </div>
+    </form>
+</div>
+
+{% endblock %}
